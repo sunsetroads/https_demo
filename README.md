@@ -18,13 +18,13 @@ HTTPS客户端与服务器交互过程：
 使用openssl生成证书
 ```
 # 1.生成私钥
-$ openssl genrsa -out server.key 2048
+$ openssl genrsa -out private.key 2048
 
 # 2.生成 CSR (Certificate Signing Request)
-$ openssl req -subj "/C=CN/ST=GuangDong/L=ShenZhen/O=xlcw/OU=xlcw Software" -new -key server.key -out server.csr
+$ openssl req -subj "/C=CN/ST=GuangDong/L=ShenZhen/O=xlcw/OU=xlcw Software" -new -key server.key -out ca.csr
 
 # 3.生成自签名证书
-$ openssl x509 -req -days 3650 -in server.csr -signkey server.key -out server.crt
+$ openssl x509 -req -days 3650 -in server.csr -signkey server.key -out ca.cer
 ```
 #### 4. 服务端配置
 引入系统的https模块即可（其它语言类似），也可以通过Nginx配置实现。以node.js为例：
